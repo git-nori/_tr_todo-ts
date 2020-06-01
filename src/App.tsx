@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 
-import TaskInput from "./components/TaskInput";
-import TaskList from "./components/TaskList";
-import { Task } from "./components/Types";
+import TaskInput from "./features/tasks/TaskInput";
+import TaskList from "./features/tasks/TaskList";
+import { Task } from "./features/tasks/Types";
 
 const initialState: Task[] = [
   {
