@@ -1,11 +1,32 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
-function App() {
+import TaskInput from "./components/TaskInput";
+import TaskList from "./components/TaskList";
+import { Task } from "./components/Types";
+
+const initialState: Task[] = [
+  {
+    id: 2,
+    title: "next task",
+    done: false,
+  },
+  {
+    id: 1,
+    title: "first task",
+    done: true,
+  },
+];
+
+const App: React.FC = () => {
+  const [tasks, setTasks] = useState(initialState);
+
   return (
-    <div className="App">
+    <div>
+      <TaskInput setTasks={setTasks} tasks={tasks} />
+      <TaskList setTasks={setTasks} tasks={tasks} />
     </div>
   );
-}
+};
 
 export default App;
