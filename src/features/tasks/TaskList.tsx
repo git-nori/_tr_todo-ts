@@ -3,10 +3,11 @@ import TaskItem from "./TaskItem";
 import { Task } from "./Types";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/rootReducer";
+import { AppDispatch } from "../../app/store";
 import { doneTask, deleteTask } from "./tasksSlice";
 
 const TaskList: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const tasks: Task[] = useSelector((state: RootState) => state.tasks.tasks);
 
   const handleDone = (task: Task) => {
