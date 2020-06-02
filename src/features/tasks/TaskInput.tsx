@@ -1,29 +1,17 @@
 import React, { useState } from "react";
-import { Task } from "./Types";
+import { useDispatch } from "react-redux";
+import { addTask } from "./tasksSlice";
 
-type Props = {
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-  tasks: Task[];
-};
-
-const TaskInput: React.FC<Props> = ({ setTasks, tasks }) => {
+const TaskInput: React.FC = () => {
+  const dispatch = useDispatch();
   const [inputTitle, setInputTitle] = useState<string>("");
-  const [count, setCount] = useState<number>(tasks.length + 1);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputTitle(e.target.value);
   };
 
   const handleSubmit = () => {
-    setCount(count + 1);
-
-    const newTask: Task = {
-      id: count,
-      title: inputTitle,
-      done: false,
-    };
-
-    setTasks([newTask, ...tasks]);
+    dispatch(addTask(inputTitle));
     setInputTitle("");
   };
 
@@ -37,7 +25,9 @@ const TaskInput: React.FC<Props> = ({ setTasks, tasks }) => {
             value={inputTitle}
             onChange={handleInputChange}
           />
-          <button onClick={handleSubmit} className="btn is-primary">ADD</button>
+          <button onClick={handleSubmit} className="btn is-primary">
+            ADD
+          </button>
         </div>
       </div>
     </div>
