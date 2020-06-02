@@ -1,21 +1,20 @@
 import React from "react";
 import TaskItem from "./TaskItem";
 import { Task } from "./Types";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../app/rootReducer";
+import { doneTask, deleteTask } from "./tasksSlice";
 
-type Props = {
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-};
+const TaskList: React.FC = () => {
+  const dispatch = useDispatch();
+  const tasks: Task[] = useSelector((state: RootState) => state.tasks.tasks);
 
-const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
   const handleDone = (task: Task) => {
-    setTasks((prev) =>
-      prev.map((t) => (t.id === task.id ? { ...task, done: !task.done } : t))
-    );
+    dispatch(doneTask(task));
   };
 
   const handleDelete = (task: Task) => {
-    setTasks((prev) => prev.filter((t) => t.id !== task.id));
+    dispatch(deleteTask(task));
   };
 
   return (
@@ -38,4 +37,4 @@ const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
   );
 };
 
-export default TaskList
+export default TaskList;
