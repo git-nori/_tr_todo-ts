@@ -35,6 +35,7 @@ const tasksSlice = createSlice({
         title: action.payload,
         done: false,
       };
+      state.tasks.push(newTask)
     },
     doneTask(state: State, action: PayloadAction<Task>) {
       const task = state.tasks.find((t) => t.id === action.payload.id);
